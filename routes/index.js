@@ -4,7 +4,14 @@ var SummaryTool = require('node-summary');
 var request = require('request');
 var cheerio = require('cheerio');
 
-/* GET home page. */
+router.post('/', function(req, res) {
+  var textToSummarize = req.body.text;
+  SummaryTool.summarize("", textToSummarize, function(err, summary) {
+    if(err) console.log("Something went wrong man!");
+    res.send(summary);
+  });
+});
+
 router.get('/', function(req, res) {
 
   var url = req.query.u;
